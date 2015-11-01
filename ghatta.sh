@@ -36,5 +36,9 @@ for i in "${GHATTA_PATH}/"*; do
     cp -f "${i}" . # > /dev/null 2>&1
 done
 
-git init > /dev/null 2>&1 && echo "git init done..."
+if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Already in a git repo. Not running git init..."
+else
+    git init > /dev/null 2>&1 && echo "git init done..."
+fi
 echo "Setup of node module development using generator-nm done..."
